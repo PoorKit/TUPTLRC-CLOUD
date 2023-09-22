@@ -108,8 +108,6 @@ const Borrows = types
         if (response.success){
             this.removeitem(bookId._id,BookStore);
             alert("Book cancelled successfully!");
-            console.log("WOW!");
-            console.log(self.bookId);
         }else{
             alert("Error occured while cancelling book");
         }

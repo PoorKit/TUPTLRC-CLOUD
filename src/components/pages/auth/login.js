@@ -39,7 +39,6 @@ export default Login = observer(() => {
             try{
                 const response = await loginasync(email,password);
                 AuthStore.donewithload();
-                console.log(response);
                 if(response.success === false){
                     navigation.navigate('Capture', response.message);
                 }
