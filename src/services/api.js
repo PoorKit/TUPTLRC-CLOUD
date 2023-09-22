@@ -1,9 +1,10 @@
 import axios from "axios";
+import * as constants from "../services/constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const updateUserInformation = async (userid, updatedparams) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -11,7 +12,7 @@ export const updateUserInformation = async (userid, updatedparams) => {
           };
           
         const response = await axios.put(
-            WebUrl + "/profile/update/" + userid,
+            constants.base_full_url + "/profile/update/" + userid,
             updatedparams,
             { headers }
         );
@@ -25,7 +26,7 @@ export const updateUserInformation = async (userid, updatedparams) => {
 
 export const updateUserPassword = async (userid, updatedparams) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -34,7 +35,7 @@ export const updateUserPassword = async (userid, updatedparams) => {
 
         // This works and takes into account only what parameters are updated
         const response = await axios.put(
-            WebUrl + "/user/updatepassword/" + userid,
+            constants.base_full_url + "/user/updatepassword/" + userid,
             updatedparams,
             { headers }
         );
@@ -52,7 +53,7 @@ export const updateUserPassword = async (userid, updatedparams) => {
 
 export const deactivateaccount = async (userid) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -60,7 +61,7 @@ export const deactivateaccount = async (userid) => {
           };
 
         const response = await axios.post(
-            WebUrl + "/user/deactivate/" + userid,
+            constants.base_full_url + "/user/deactivate/" + userid,
             { headers }
         );
         if (response.data.success) {
@@ -74,7 +75,7 @@ export const deactivateaccount = async (userid) => {
 
 export const activateaccount = async (userid) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -82,7 +83,7 @@ export const activateaccount = async (userid) => {
           };
 
         const response = await axios.put(
-            WebUrl + "/user/activate/" + userid,
+            constants.base_full_url + "/user/activate/" + userid,
             { headers }
         );
         if (response.data.success) {
@@ -96,7 +97,7 @@ export const activateaccount = async (userid) => {
 
 export const registerNotification = async (userid, pushtoken) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -105,7 +106,7 @@ export const registerNotification = async (userid, pushtoken) => {
 
         // This works and takes into account only what parameters are updated
         const response = await axios.post(
-            WebUrl + "/notification/register",
+            constants.base_full_url + "/notification/register",
             { userid: userid, token: pushtoken },
             { headers }
         );
@@ -119,7 +120,7 @@ export const registerNotification = async (userid, pushtoken) => {
 
 export const unregisterNotification = async (userid) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -128,7 +129,7 @@ export const unregisterNotification = async (userid) => {
 
         // This works and takes into account only what parameters are updated
         const response = await axios.post(
-            WebUrl + "/notification/unregister",
+            constants.base_full_url + "/notification/unregister",
             { userid: userid },
             { headers }
         );
@@ -142,7 +143,7 @@ export const unregisterNotification = async (userid) => {
 
 export const SeenNotification = async (notificationid) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -151,7 +152,7 @@ export const SeenNotification = async (notificationid) => {
 
         // This works and takes into account only what parameters are updated
         const response = await axios.post(
-            WebUrl + "/notification/recieved",
+            constants.base_full_url + "/notification/recieved",
             { id: notificationid },
             { headers }
         );
@@ -165,7 +166,7 @@ export const SeenNotification = async (notificationid) => {
 
 export const fetchNotifications = async () => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -173,7 +174,7 @@ export const fetchNotifications = async () => {
           };
 
         const response = await axios.get(
-            WebUrl + "/notification",
+            constants.base_full_url + "/notification",
             { headers }
         );
         return response.data;
@@ -184,7 +185,7 @@ export const fetchNotifications = async () => {
 
 export const FetchPenalty = async () => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -192,7 +193,7 @@ export const FetchPenalty = async () => {
           };
 
         const response = await axios.get(
-            WebUrl + "/profile/penalty",
+            constants.base_full_url + "/profile/penalty",
             null,
             { headers }
         );
@@ -204,7 +205,7 @@ export const FetchPenalty = async () => {
 
 export const fetchBorrow = async () => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -212,7 +213,7 @@ export const fetchBorrow = async () => {
           };
 
         const response = await axios.get(
-            WebUrl + "/borrow/request",
+            constants.base_full_url + "/borrow/request",
             { headers }
         );
         return response.data.studentborrowbook;
@@ -223,7 +224,7 @@ export const fetchBorrow = async () => {
 
 export const fetchLatestBorrow = async () => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -231,7 +232,7 @@ export const fetchLatestBorrow = async () => {
           };
 
         const response = await axios.get(
-            WebUrl + "/borrow/books",
+            constants.base_full_url + "/borrow/books",
             { headers }
         );
         return response.data.studentappointmentbook;
@@ -242,7 +243,7 @@ export const fetchLatestBorrow = async () => {
 
 export const borrowBook = async (userID, bookID) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -250,7 +251,7 @@ export const borrowBook = async (userID, bookID) => {
           };
 
         const response = await axios.post(
-            WebUrl + "/book/borrow",
+            constants.base_full_url + "/book/borrow",
             { userId: userID, bookId: bookID },
             { headers }
         );
@@ -262,7 +263,7 @@ export const borrowBook = async (userID, bookID) => {
 
 export const cancelborrowBook = async (userID, bookID) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -270,7 +271,7 @@ export const cancelborrowBook = async (userID, bookID) => {
           };
 
         const response = await axios.post(
-            WebUrl + "/book/cancel",
+            constants.base_full_url + "/book/cancel",
             { userId: userID, bookId: bookID },
             { headers }
         );
@@ -282,7 +283,7 @@ export const cancelborrowBook = async (userID, bookID) => {
 
 export const cancelAllborrowBook = async (userID) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -290,7 +291,7 @@ export const cancelAllborrowBook = async (userID) => {
           };
 
         const response = await axios.post(
-            WebUrl + "/book/cancel/all",
+            constants.base_full_url + "/book/cancel/all",
             { userId: userID },
             { headers }
         );
@@ -302,7 +303,7 @@ export const cancelAllborrowBook = async (userID) => {
 
 export const confirmRequest = async (userID, appointmentDate, dueDate) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
@@ -310,7 +311,7 @@ export const confirmRequest = async (userID, appointmentDate, dueDate) => {
           };
 
         const response = await axios.post(
-            WebUrl + "/book/confirm",
+            constants.base_full_url + "/book/confirm",
             {
                 userId: userID,
                 appointmentDate: appointmentDate,
@@ -326,14 +327,14 @@ export const confirmRequest = async (userID, appointmentDate, dueDate) => {
 
 export const fetchBooks = async () => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
         const Token = await AsyncStorage.getItem("Token");
         const headers = {
             "Content-Type": "application/json",
             Authorization: `Bearer ${Token}`,
           };
           
-        const response = await axios.post(WebUrl + "/books", { headers });
+        const response = await axios.post(constants.base_full_url + "/books", { headers });
         const books = response.data.studentbook.map((book) => {
             const convertedBook = { ...book }; // create a copy of the book object
             convertedBook.Fil =
@@ -360,9 +361,9 @@ export const fetchBooks = async () => {
 
 export const loginasync = async (email, password) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
 
-        const response = await axios.post(WebUrl + "/login", {
+        const response = await axios.post(constants.base_full_url + "/login", {
             email,
             password,
         });
@@ -378,9 +379,9 @@ export const loginasync = async (email, password) => {
 
 export const googleloginasync = async (currentUser) => {
     try {
-        const WebUrl = await AsyncStorage.getItem("WebUrl");
+        
 
-        const response = await axios.post(WebUrl + "/user/google", {
+        const response = await axios.post(constants.base_full_url + "/user/google", {
             currentUser,
         });
         return response.data;
